@@ -1,3 +1,6 @@
+﻿合并分支时遇到冲突，解决冲突，然后提交，再反向合并以达到和2个分支的同步
+
+把最新的push到远程上去后，在本地修改代码，发现该乱了，想把远程的pull下来。这种是svn的想法，在git中这时使用git pull是获取不到远程仓库的内容的。在git中是通过改变head指针的方式来实现的。所以通过git reset --hard  id即可
 
 $ git config --global user.name "Your Name"
 
