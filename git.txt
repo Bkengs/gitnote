@@ -1,4 +1,12 @@
-﻿合并分支时遇到冲突，解决冲突，然后提交，再反向合并以达到和2个分支的同步
+﻿revert指定版本可以实现版本回退。这个不是像reset一样指针回退，而是会创建一个新的提交，而且将指定版本的修改逆过来。这样，我们想回退的内容被逆反修改过来了，而且我们的版本比master先进。这样就可以直接提交了。
+GitHub常用的开发协同流程为：将别人的仓库fork成自己的origin仓库 → git clone origin仓库到本地 → 本地添加fork源仓库 → 工作前先git remote update下fork源保持代码较新 → coding → push回自己 → github上提出Push Request即可
+git remote add 。。。。
+（1）同步源仓库的信息到本地   
+   $ git remote update source_repository_name  
+（2）将源仓库的信息merge到本地分支:   
+   $ git checkout branch_name  
+   $ git rebase source_repository_name/branch_name 
+合并分支时遇到冲突，解决冲突，然后提交，再反向合并以达到和2个分支的同步
 
 把最新的push到远程上去后，在本地修改代码，发现该乱了，想把远程的pull下来。这种是svn的想法，在git中这时使用git pull是获取不到远程仓库的内容的。在git中是通过改变head指针的方式来实现的。所以通过git reset --hard  id即可
 
