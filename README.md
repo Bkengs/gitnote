@@ -1,4 +1,4 @@
-﻿## 初始配置
+## 初始配置
 
 * `git config --global user.name "Your Name"`，`git config --global user.email "email@example.com"`用来配置用户名和邮箱，一般在第一次操作时会提醒配置。
 * `ssh-keygen -t rsa -C "youremail@example.com"`执行后默认会在`C:\Users\Administrator\.ssh`下生成几个文件，只要将其中的`id_rsa.pub`中的内容复制
