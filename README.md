@@ -3,6 +3,11 @@
 * `git config --global user.name "Your Name"`，`git config --global user.email "email@example.com"`用来配置用户名和邮箱，一般在第一次操作时会提醒配置。
 * `ssh-keygen -t rsa -C "youremail@example.com"`执行后默认会在`C:\Users\Administrator\.ssh`下生成几个文件，只要将其中的`id_rsa.pub`中的内容复制
 到（gitlab，github）对应配置ssh的地方保存后就可对有权限的仓库进行代码的push操作。
+* 在用ssh类型的地址(例如:`git@114.55.92.162:chendebo/gitNote.git`)项目时，ssh密钥起作用则在push，pull等操作时就不要再次输入密码。
+* 在使用http类型的地址(例如:`http://114.55.92.162/chendebo/gitNote.git`)项目时，ssh密钥则无效，为了避免重复输入账号密码：
+方法一：`git config --global credential.helper store`
+方法二：clone时添加前缀`http://yourname:password@114.55.92.162/chendebo/gitNote.git`
+* 如果你正在使用ssh想转换成http：`git remote rm origin`,`git remote add origin http://yourname:password@114.55.92.162/chendebo/gitNote.git`
 
 ## 创建仓库
 ##### 先本地后远程
@@ -27,7 +32,10 @@
 * `git reflog` 用来记录你的每一次命令，当你用`git reset --hard HEAD^`回退到当前版本之前的版本时，再想恢复到当前版本，就必须找到对应commit id
 
 ## 关于git reset
-
+* git reset的版本回退针对的是本地的查看，未push的。（否则回退后提交会冲突）
+* `--soft` :工作区会保留修改后的代码,只是将git commit信息回退到了某个版本
+* `--mixed`：工作区会保留修改后的代码,只是将git commit和index 信息回退到了某个版本（默认）
+* `--hard` ：源码也会回退到某个版本,commit和index 都回回退到某个版本
 * `git reset --hard  id` 回退版本，其中id为commit id（通过查找历史课查看），也可以用HEAD（其实为指针）表示当前版本，
 上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`，当然往上100个版本写100个`^`比较容易数不过来，所以写成`HEAD~100`。
 * `git reset HEAD file` 可以把暂存区的修改撤销掉（unstage），重新放回工作区
@@ -36,6 +44,11 @@
 2. 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
 3. 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
 
+## 关于git revert
+* git revert用一个新提交来消除一个历史提交所做的任何修改.
+* revert 之后你的本地代码会回滚到指定的历史版本,这时你再 git push 既可以把线上的代码更新.(这里不会像reset造成冲突的问题)
+* `git revert c011eb3`
+* git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit
 
 ## 关于git checkout
 
