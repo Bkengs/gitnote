@@ -99,4 +99,4 @@
 
 * 在git pull时提示`no tracking information`
 
-> 说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream branch-name remote-name/branch-name`例如`git branch --set-upstream dev origin/dev`
+> 说明本地分支和远程分支的链接关系没有创建，用命令`git branch --set-upstream branch-name remote-name/branch-name`例如`git branch --set-upstream dev origin/dev` 
